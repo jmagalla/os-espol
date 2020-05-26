@@ -1,1 +1,1 @@
-# Code for OS ESPOL course
+# OS course code
