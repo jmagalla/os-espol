@@ -16,4 +16,8 @@ Processes created by the 3rd fork: P4, P5, P6, P7
    /
  P7
 
- 2- example2 and example3: explained what will be output
+2- example2 and example3: explained what will be output
+
+3- fork_wait: program to demostrate use of fork and wait, call wait from parent 
+
+4- 

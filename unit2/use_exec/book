@@ -1,0 +1,4 @@
+1- exec: example for call another program without arguments
+
+2- for_exec: example of fork and exec 
+Source: https://www.geeksforgeeks.org/exec-family-of-functions-in-c/

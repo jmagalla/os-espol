@@ -1,4 +1,4 @@
-all: init example1 example2 example3
+all: init example1 example2 example3 fork_wait
 
 init: 
 	mkdir -p build
@@ -11,6 +11,9 @@ example2:
 
 example3:
 	gcc -o build/example3 example3.c
+
+fork_wait: 
+	gcc -o build/fork_wait fork_wait.c
 
 clean:
 	rm build/*
