@@ -25,3 +25,4 @@ Uso 2:
 sort names.data | ./build/mycat
 ``` 
 
+En el uso 1 muestra el contenido de names.data y el segundo caso muestra el contenido ordenado del archivo names.data.
