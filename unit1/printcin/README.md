@@ -13,11 +13,14 @@ make
 
 ## Uso
 Puede ejecutar el programa de dos maneras
-1* ```bash
+1. 
+```bash
 ./build/mycat names.data
 ```
 
-2* ``bash
+2. 
+
+``bash
 sort names.data | ./build/mycat
 ``` 
 
