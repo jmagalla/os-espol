@@ -1,3 +1,4 @@
+# Use: 
 To run: from one console execute "./producer" and from another console execute "./consumer"
 
 Source: https://www.geeksforgeeks.org/posix-shared-memory-api/
