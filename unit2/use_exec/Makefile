@@ -4,7 +4,7 @@ init:
 	mkdir -p build
 
 exec: 
-	gcc -o build/exec exec.c -lrt
+	gcc -o build/exec exec.c
 
 example1:
 	gcc -o build/example1 example1.c -lrt
