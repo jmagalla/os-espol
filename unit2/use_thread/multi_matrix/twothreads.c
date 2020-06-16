@@ -22,7 +22,7 @@
 #define N 2048 // number of rows/columns
 int a[N][N], b[N][N], c[N][N];
 
-#define NCORES 2 // # CPU cores; adjust this value for your system!
+#define NCORES 4 // # CPU cores; adjust this value for your system!
 int a[N][N], b[N][N], c[N][N];
 
 /* Each thread will run this function, working on a different row of 
