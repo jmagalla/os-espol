@@ -7,5 +7,4 @@ mycat: main.cpp
 	 g++ -g -Wall -o build/mycat main.cpp
 
 clean:
-
 	 rm build/*

@@ -8,9 +8,9 @@ int main()
     int x = 1;
 
     if (fork() == 0)
-        printf("Child has x = %d\n", ++x);
+        printf("Child has x = %d, %d\n", ++x, &x);
     else
-        printf("Parent has x = %d\n", --x);
+        printf("Parent has x = %d, %d\n", --x, &x);
 
     return 0;
 }

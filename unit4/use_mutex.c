@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
     if (argc > 1) 
         loops = atoi(argv[1]);
     else
-        loops = 10000000;
+        loops = 10000;
     
     pthread_create(&t1, NULL, threadFunc, &loops);
     pthread_create(&t2, NULL, threadFunc, &loops);
