@@ -22,7 +22,7 @@ int main(int argc, char** argv) {
         /*Code to handle the error*/
         printf("Value of the errno: %d\n", errno);
         fprintf(stderr, "The error messages is %s\n", strerror(errno));
-        perror("Error in open.");
+        perror("Error in open");
         exit(EXIT_FAILURE);
     }
     else
