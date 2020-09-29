@@ -1,0 +1,1 @@
+Error of use: ./mysyscall filename
