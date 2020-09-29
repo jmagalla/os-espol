@@ -1,10 +1,10 @@
-all: init mycat
+all: build build/mycat
 
-init:
+build:
 	mkdir -p build
 
-mycat: main.cpp 
+build/mycat: main.cpp 
 	 g++ -g -Wall -o build/mycat main.cpp
 
 clean:
-	 rm build/*
+	 rm *.o build/*

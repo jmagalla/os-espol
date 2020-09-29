@@ -1,0 +1,5 @@
+Wellcome to OS course ESPOL
+I'm appreciating to be your teacher in this subject.
+This an example of a file to show how to manage errors in the syscalls.
+Thank you,
+Jorge Magallanes
