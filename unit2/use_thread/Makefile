@@ -1,16 +1,19 @@
-all: init simple onethread nthread use_join
+all: build build/simple build/onethread build/nthreads build/use_join
 
-init: 
+build: 
 	mkdir -p build
 
-simple: simple_example.c
+build/simple: simple_example.c
 	gcc -o build/simple simple_example.c -lpthread
 
-onethread: multi_matrix/onethread.c
+build/onethread: multi_matrix/onethread.c
 	gcc -o build/onethread multi_matrix/onethread.c -lpthread
 
-nthread: multi_matrix/twothreads.c
-	gcc -o build/twothreads multi_matrix/twothreads.c -lpthread
+build/nthreads: multi_matrix/twothreads.c
+	gcc -o build/nthreads multi_matrix/twothreads.c -lpthread
 
-use_join:
+build/use_join:
 	gcc -o build/use_join use_join.c -lpthread
+
+clean: 
+	rm -R build/

@@ -8,8 +8,6 @@
 #include <string.h>  /* Prototypes for handle errors */
 
 int main(int argc, char** argv) {
-    char * name;
-    char output;
     if (argc != 2) {
         fprintf(stderr, "Error of use: ./mysyscall filename\n"); /* write to standart error */
         exit(EXIT_FAILURE);
@@ -21,7 +19,7 @@ int main(int argc, char** argv) {
     if (fd == -1) {
         /*Code to handle the error*/
         printf("Value of the errno: %d\n", errno);
-        fprintf(stderr, "The error messages is %s\n", strerror(errno));
+        //fprintf(stderr, "The error messages is %s\n", strerror(errno));
         perror("Error in open");
         exit(EXIT_FAILURE);
     }
