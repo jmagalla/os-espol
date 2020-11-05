@@ -46,5 +46,5 @@ int main(int argc, char *argv[])
 void *runner(void *param)
 {
 	value = 5;
-	pthread_exit(0);
+	pthread_exit((void *) 0);
 }
