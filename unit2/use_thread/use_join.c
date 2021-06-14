@@ -8,7 +8,7 @@ static void *threadFunc(void *arg)
 {
     char *s = (char *)arg;
     printf("%s", s);
-    return (void *)strlen(s);
+    pthread_exit((void *) strlen(s));
 }
 
 int main(int argc, char *argv[])
