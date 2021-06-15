@@ -54,27 +54,27 @@ Hay muchos datos aquí, pero los campos importantes son:
 Una vez que haya leído el encabezado, sabrá cuántos píxeles hay en la imagen y puede leerlos en una matriz bidimensional. La estructura para contener una imagen general está en bmp.h:
 
 ```c
-typedef struct __attribute__((packed)) BMP_Image {
+typedef struct BMPImage {
     BMP_Header header;
-    int data_size;
-    int width;
-    int height;
-    int bytes_per_pixel; // This amount should be equals to number of bits/8
-    Pixel ** pixels;
-} BMP_Image;
+    int norm_height; //normalized height
+    Pixel * * pixels;
+} BMPImage;
 ```
 
-(Tenga en cuenta que norm_heightcontiene la altura de la imagen en píxeles. Almacenamos esto por separado height_pxporque este último puede ser negativo. norm_heightSiempre debe ser positivo).
+Tenga en cuenta que `norm_height` contiene la altura de la imagen en píxeles. Almacenamos esto por separado ya que `height_px` puede ser negativo. `norm_height` siempre debe ser positivo.
 
 La Pixelestructura de datos es:
 
+```c
 typedef struct __attribute__((packed)) Pixel {
     uint8_t blue;
     uint8_t green;
     uint8_t red;
     uint8_t alpha;
 } Pixel;
-Tenga en cuenta que el orden en que se definen los campos en esta estructura coincide con el orden en que existen en el archivo (por lo que si un píxel ocupa 4 bytes en el archivo, el primer byte es el valor del canal azul, el segundo es el valor del verde, etc.).
+```
+
+Note que el orden en que se definen los campos en esta estructura coincide con el orden en que existen en el archivo, por lo que si un píxel ocupa 4 bytes en el archivo, el primer byte es el valor del canal azul, el segundo es el valor del verde, etc.
 
 > Tenga en cuenta que el orden de los canales aquí se lee como "BGRA", que parece invertido del orden al que estamos acostumbrados (alfa + RGB). Esto se debe a que los BMP son un formato little-endian: lo que normalmente escribiríamos como primer byte es en realidad el último byte de la palabra de 4 bytes.
 
