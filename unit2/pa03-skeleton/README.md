@@ -61,9 +61,9 @@ typedef struct BMPImage {
 } BMPImage;
 ```
 
-Tenga en cuenta que `norm_height` contiene la altura de la imagen en píxeles. Almacenamos esto por separado ya que `height_px` puede ser negativo. `norm_height` siempre debe ser positivo.
+Tenga en cuenta que `norm_height` contiene la altura normalizada de la imagen en píxeles. Almacenamos esto por separado ya que `height_px` puede ser negativo, en cambio, `norm_height` siempre debe ser positivo.
 
-La Pixelestructura de datos es:
+La estructura de datos `Pixel` es:
 
 ```c
 typedef struct __attribute__((packed)) Pixel {
