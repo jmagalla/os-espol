@@ -1,3 +1,5 @@
+#include <stdint.h>
+
 #ifndef _BMP_H_
 #define _BMP_H_
 #define TRUE 1
@@ -26,10 +28,6 @@
  * BMP header (54 bytes).
  */
 
-typedef unsigned short int uint16_t;
-typedef unsigned int uint32_t;
-typedef int int32_t;
-
 typedef struct {
     uint16_t type;                      // Magic identifier
     uint32_t size;                      // File size in bytes
@@ -37,10 +35,10 @@ typedef struct {
     uint16_t reserved2;       // Not used
     uint32_t offset;                    // Offset to image data in bytes
     uint32_t header_size;               // Header size in bytes
-    int32_t  width;                     // Width of the image
-    int32_t  height;                    // Height of image
+    int32_t  width_px;                  // Width of the image
+    int32_t  height_px;                    // Height of image
     uint16_t planes;                    // Number of color planes
-    uint16_t bits;                      // Bits per pixel
+    uint16_t bits_per_pixel;                      // Bits per pixel
     uint32_t compression;               // Compression type
     uint32_t imagesize;                 // Image size in bytes
     int32_t  xresolution;               // Pixels per meter
@@ -50,13 +48,20 @@ typedef struct {
 
 } BMP_Header;
 
+typedef struct __attribute__((packed)) Pixel {
+    uint8_t blue;
+    uint8_t green;
+    uint8_t red;
+    uint8_t alpha;
+} Pixel;
+
 typedef struct {
     BMP_Header header;
     int data_size;
     int width;
-    int height;
+    int height_px;
     int bytes_per_pixel; // This amount should be equals to number of bits/8
-    char *data;
+    Pixel ** pixels;
 } BMP_Image;
 
 void PrintError(int error);

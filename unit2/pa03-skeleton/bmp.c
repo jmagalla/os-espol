@@ -101,7 +101,7 @@ int CheckBMPValid(BMP_Header* header) {
     return FALSE;
   }
   // Make sure we are getting 24 bits per pixel
-  if (header->bits != 24) {
+  if (header->bits_per_pixel != 24) {
     return FALSE;
   }
   // Make sure there is only one image plane
@@ -123,10 +123,10 @@ void PrintBMPHeader(BMP_Header* header) {
   printf("file size: %d\n", header->size);
   printf("offset to image data: %d\n", header->offset);
   printf("header size: %d\n", header->header_size);
-  printf("width: %d\n", header->width);
-  printf("height: %d\n", header->height);
+  printf("width_px: %d\n", header->width_px);
+  printf("height_px: %d\n", header->height_px);
   printf("planes: %d\n", header->planes);
-  printf("bits: %d\n", header->bits);
+  printf("bits: %d\n", header->bits_per_pixel);
 }
 
 /* The function prints information of the BMP_Image.
@@ -134,7 +134,7 @@ void PrintBMPHeader(BMP_Header* header) {
 */
 void PrintBMPImage(BMP_Image* image) {
   printf("data size is %d\n", image->data_size);
-  printf("width is %d\n", image->width);
-  printf("height size is %d\n", image->height);
+  printf("width_px is %d\n", image->width_px);
+  printf("height_px size is %d\n", image->height);
   printf("bytes per pixel is %d\n", image->bytes_per_pixel);
 }

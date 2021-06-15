@@ -1,5 +1,12 @@
 {
     "files.associations": {
-        "cerrno": "c"
+        "cerrno": "c",
+        "atomic": "c",
+        "*.tcc": "c",
+        "istream": "c",
+        "ostream": "c",
+        "functional": "c",
+        "fstream": "c",
+        "limits": "c"
     }
 }
