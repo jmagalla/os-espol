@@ -54,11 +54,11 @@ Hay muchos datos aquí, pero los campos importantes son:
 Una vez que haya leído el encabezado, sabrá cuántos píxeles hay en la imagen y puede leerlos en una matriz bidimensional. La estructura para contener una imagen general está en bmp.h:
 
 ```c
-typedef struct BMPImage {
+typedef struct BMP_Image {
     BMP_Header header;
     int norm_height; //normalized height
     Pixel * * pixels;
-} BMPImage;
+} BMP_Image;
 ```
 
 Tenga en cuenta que `norm_height` contiene la altura normalizada de la imagen en píxeles. Almacenamos esto por separado ya que `height_px` puede ser negativo, en cambio, `norm_height` siempre debe ser positivo.
@@ -79,27 +79,55 @@ Note que el orden en que se definen los campos en esta estructura coincide con e
 > Tenga en cuenta que el orden de los canales aquí se lee como "BGRA", que parece invertido del orden al que estamos acostumbrados (alfa + RGB). Esto se debe a que los BMP son un formato little-endian: lo que normalmente escribiríamos como primer byte es en realidad el último byte de la palabra de 4 bytes.
 
 ### Procesamiento básico de imágenes
-Una de las tareas más básicas de manipulación de imágenes es filtrar una imagen: aplicarle una transformación para desenfocar la imagen, enfocar la imagen, etc. Resulta que existe un marco general para manipular imágenes que puede desenfocar o enfocar imágenes, o detectar bordes, usando la misma estrategia. La idea es realizar una convolución utilizando un filtro de caja . Para entender lo que esto significa, pensemos en cómo podemos difuminar una imagen.
+Una de las tareas más básicas de manipulación de imágenes es filtrar una imagen: aplicarle una transformación para desenfocar la imagen, enfocar la imagen, etc. Resulta que existe un marco general para manipusubprocesoslar imágenes que puede desenfocar o enfocar imágenes, o detectar bordes, usando la misma estrategia. La idea es realizar una convolución utilizando un filtro de caja . Para entender lo que esto significa, pensemos en cómo podemos difuminar una imagen.
 
-Consideremos que nuestra imagen es una gran cuadrícula de píxeles. Para difuminar una imagen, una cosa que podríamos hacer es "difuminar" los colores a través de la imagen: mezclar los colores de cada píxel con los colores de sus vecinos. Podemos hacer esto de una manera general usando un filtro de caja, que se parece a una cuadrícula de 3 por 3 en sí misma:
+Consideremos que nuestra imagen es una gran cuadrícula de píxeles. Para difuminar una imagen, una cosa que podríamos hacer es "difuminar" los colores a través de la misama imagen: mezclar los colores de cada píxel con los colores de sus vecinos. Podemos hacer esto, de una manera general usando un filtro de caja, que se parece a una matriz de unos de 3 por 3:
 
     1 1 1
     1 1 1
     1 1 1
 
-Si superponemos el centro del filtro de caja en la parte superior de un solo píxel de destino, entonces los píxeles circundantes se ubican "encima" de los píxeles vecinos del destino. Para aplicar un filtro de caja, tomamos cada canal, multiplicamos los valores en cada celda del filtro de caja por el valor del canal del píxel sobre el que se encuentran y los sumamos (en este caso, por ejemplo, multiplicamos cada de los canales rojos por 1 y súmelos juntos, sumando efectivamente los canales rojos del píxel de destino y los ocho de sus vecinos, y repita para cada uno de los otros tres canales). Luego normalizamos los valores del canal dividiéndolos por un factor de normalización especificado para el filtro en particular. En este caso, el factor de normalización es 9.0. Esto nos da los nuevos valores de canal para el píxel de destino.
+Si superponemos el centro del filtro de caja en la parte superior de un solo píxel de destino, entonces los píxeles circundantes se ubican "encima" de los píxeles vecinos del destino. Para aplicar un filtro de caja, multiplicamos los valores en cada celda del filtro de caja por el valor de cada píxel sobre el que se encuentran y los sumamos. En el caso de nuestro filtro de unos, equivale a sumar cada pixel en el canal rojo del píxel de destino y los ocho de sus vecinos. Luego, debe normalizar los valores del canal dividiéndolos por un factor de normalización especificado para el filtro en particular. En este caso, el factor de normalización es 9.0. Esto nos da los nuevos valores de canal para el píxel de destino.
 
-Por ejemplo, si los valores del canal rojo para el píxel de destino y sus vecinos son:
+Por ejemplo, si los valores del canal rojo para el píxel de destino, el del centro que es el 100, y sus vecinos son:
 
     201 191 210
     293 100 102
     200  75  50
 
-El canal rojo de salida para el píxel de destino será 158.
+El canal rojo de salida para el píxel de destino será:
+
+`((201*1)+(191*1)+(210*1)+(293*1)+(100*1)+(102*1)+(200*1)+(75*1)+(50*1)) / 9 = 158`
 
 Si hacemos esto para cada canal y cada píxel de la imagen, podemos generar los nuevos valores en una nueva imagen para crear una versión borrosa de la imagen.
 
+### Procesando una imagen en paralelo
+
+Hay muchas formas de procesar una imagen en paralelo, pero fundamentalmente todas se basan en la misma idea: el cálculo necesario para generar un píxel de salida es independiente del cálculo necesario para generar otro píxel de salida. Dos operaciones son independientes entre sí, ninguna escribe en una ubicación de memoria desde la que la otra lee o escribe. Si dos operaciones son independientes, es seguro ejecutarlas en paralelo; ¡es seguro que dos hilos diferentes las ejecuten, no hay condiciones de carrera! Entonces, la idea de procesar una imagen en paralelo es dar a diferentes hilos diferentes conjuntos de píxeles para procesar.
+
+Hay muchas formas diferentes de dividir los píxeles, pero sugerimos un enfoque sencillo: divida la imagen por filas. Entonces, si, por ejemplo, tiene 100 filas de píxeles y dos hilos, el primer hilo será responsable de calcular todos los píxeles de salida en las filas 0-49, y el segundo hilo será responsable de calcular todos los píxeles de salida en las filas 50-99. Sin embargo, puede dividir los píxeles de salida de la forma que desee. Un par de cosas a tener en cuenta:
+
+- Cada hilo debe tener aproximadamente el mismo número de píxeles de salida para procesar (balance). De esta manera, ningún hilo tiene mucho más trabajo que hacer que otro.
+- No debe asignar un píxel a más de un subproceso; de lo contrario, sus subprocesos no realizarán un trabajo independiente.
+- Cada píxel debe asignarse a un hilo; de lo contrario, no se hará parte del trabajo.
+
 ## Lo que tiene que hacer 
+
+Su trabajo es:
+
+1. Escriba una rutina para leer archivos de imagen BMP. Esto significa asignar una estructura `BMP_Image` como se describe en bmp.h y asignar e inicializar los píxeles.
+2. Escriba una rutina para generar una nueva estructura `BMP_Image`  que contenga una versión borrosa de la imagen de entrada original. Utilice el filtro de cuadro de desenfoque lineal 3x3 y el enfoque descrito anteriormente.
+
+3. Escriba una rutina para escribir esa nueva imagen BMP en un archivo de salida. Esto significa que debe obtener el formato de encabezado correcto (pista: debería poder reutilizar una gran cantidad de datos en el encabezado de la imagen de entrada).
+4. Escriba una rutina para liberar estructuras de datos de imágenes. Esta rutina debería liberar completamente la estructura de datos de la imagen.
+
+Hemos proporcionado `bmp.h`, que declara la cabecera, la imagen y las estructuras de píxeles necesarios, así como los tres métodos, `readImage`, `writeImage`, y `freeImage`. Su trabajo es completar esas definiciones de métodos en el archivo bmp.c.
+
+También hemos proporcionado filter.h, que declara un método llamado blur. Su trabajo es completar la definición de ese método filter.h.
+
+Si necesita / desea definir métodos adicionales en sus archivos, no dude en hacerlo. **No cree archivos adicionales**.
+
+
 
 ## Pruebas
 
