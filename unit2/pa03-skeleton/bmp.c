@@ -5,7 +5,7 @@
 /* USE THIS FUNCTION TO PRINT ERROR MESSAGES
    DO NOT MODIFY THIS FUNCTION
 */
-void PrintError(int error){
+void printError(int error){
   switch(error){
   case ARGUMENT_ERROR:
     printf("Usage:ex5 <source> <destination>\n");
@@ -24,28 +24,13 @@ void PrintError(int error){
   }
 }
 
-/* The input argument is the number of command line arguments given when executing the file.
- * It checks to see if there are at least 3 commandline arguments.
- * If yes , the function returns TRUE. if not, the function prints error message and returns FALSE.
-*/
-int CheckArgCount(int argc) {
-}
-
-/* The input arguments are a string as the name of a file and the option on how the function will manipulate the file.
- * This function opens the file and returns the FILE pointer.
- * If it fails to open the file, the function prints error message returns NULL.
-*/
-FILE* OpenFile(char* filename, char* opt) {
-}
-
-
 /* The input argument is the source file pointer. The function will first construct a BMP_Image image by allocating memory to it.
  * Then the function read the header from source image to the image's header.
  * Compute data size, width, height, and bytes_per_pixel of the image and stores them as image's attributes.
  * Finally, allocate menory for image's data according to the image size.
  * Return image;
 */
-BMP_Image* CreateBMPImage(FILE* fptr) {
+BMP_Image* createBMPImage(FILE* fptr) {
 
   //Allocate memory for BMP_Image*;
 
@@ -56,46 +41,29 @@ BMP_Image* CreateBMPImage(FILE* fptr) {
   //Allocate memory for image data
 }
 
-
-/* The input argument is the size of image data. The function allocates memory for storing the image data and returns image data pointer.
- * If memory allocation fails, the function prints error message.
+/* The input arguments are the name of the binary file, and the image data pointer.
+ * The functions open the source file and call to CreateBMPImage to load de data image.
 */
-char* AllocateImageData(int dataSize) {
+void readImage(char *srcFileName, BMP_Image *dataImage) {
 }
 
-/* The input arguments are the source file pointer, the image data pointer, and the size of image data.
- * The functions reads data from the source into the image data.
-*/
-void ReadImageData(FILE* fptr, char* data, int dataSize) {
-}
 
-/* The input arguments are image data pointer and the size of image data.
- * The function inverts every byte of the image data.
-*/
-void InvertImageData(char* data, int dataSize) {
-}
-
-/* The input arguments are the destination file pointer, BMP_Header pointer, and the image data pointer, and the size of image data.
+/* The input arguments are the destination file name, and BMP_Image pointer.
  * The function write the header and image data into the destination file.
 */
-void WriteImage(FILE* fptr, BMP_Header* header, char* data, int dataSize) {
+void writeImage(char* destFileName, BMP_Image* dataImage) {
 }
 
 /* The input argument is the BMP_Image pointer. The function frees memory of the BMP_Image.
 */
-void FreeImage(BMP_Image* image) {
-}
-
-/* The input argument is file pointer. The function closes the file.
-*/
-void CloseFile(FILE* fptr) {
+void freeImage(BMP_Image* image) {
 }
 
 /* The functions checks if the source image has a valid format.
  * It returns TRUE if the image is valid, and returns FASLE if the image is not valid.
  * DO NOT MODIFY THIS FUNCTION
 */
-int CheckBMPValid(BMP_Header* header) {
+int checkBMPValid(BMP_Header* header) {
   // Make sure this is a BMP file
   if (header->type != 0x4d42) {
     return FALSE;
@@ -118,7 +86,7 @@ int CheckBMPValid(BMP_Header* header) {
 /* The function prints all information of the BMP_Header.
    DO NOT MODIFY THIS FUNCTION
 */
-void PrintBMPHeader(BMP_Header* header) {
+void printBMPHeader(BMP_Header* header) {
   printf("file type (should be 0x4d42): %x\n", header->type);
   printf("file size: %d\n", header->size);
   printf("offset to image data: %d\n", header->offset);
@@ -132,7 +100,7 @@ void PrintBMPHeader(BMP_Header* header) {
 /* The function prints information of the BMP_Image.
    DO NOT MODIFY THIS FUNCTION
 */
-void PrintBMPImage(BMP_Image* image) {
+void printBMPImage(BMP_Image* image) {
   printf("data size is %d\n", image->data_size);
   printf("width_px is %d\n", image->width_px);
   printf("height_px size is %d\n", image->height);

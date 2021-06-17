@@ -108,7 +108,7 @@ Hay muchas formas de procesar una imagen en paralelo, pero fundamentalmente toda
 Hay muchas formas diferentes de dividir los píxeles, pero sugerimos un enfoque sencillo: divida la imagen por filas. Entonces, si, por ejemplo, tiene 100 filas de píxeles y dos hilos, el primer hilo será responsable de calcular todos los píxeles de salida en las filas 0-49, y el segundo hilo será responsable de calcular todos los píxeles de salida en las filas 50-99. Sin embargo, puede dividir los píxeles de salida de la forma que desee. Un par de cosas a tener en cuenta:
 
 - Cada hilo debe tener aproximadamente el mismo número de píxeles de salida para procesar (balance). De esta manera, ningún hilo tiene mucho más trabajo que hacer que otro.
-- No debe asignar un píxel a más de un subproceso; de lo contrario, sus subprocesos no realizarán un trabajo independiente.
+- No debe asignar un píxel a más de un hilo; de lo contrario, sus hilos no realizarán un trabajo independiente.
 - Cada píxel debe asignarse a un hilo; de lo contrario, no se hará parte del trabajo.
 
 ## Lo que tiene que hacer 
@@ -116,19 +116,23 @@ Hay muchas formas diferentes de dividir los píxeles, pero sugerimos un enfoque 
 Su trabajo es:
 
 1. Escriba una rutina para leer archivos de imagen BMP. Esto significa asignar una estructura `BMP_Image` como se describe en bmp.h y asignar e inicializar los píxeles.
-2. Escriba una rutina para generar una nueva estructura `BMP_Image`  que contenga una versión borrosa de la imagen de entrada original. Utilice el filtro de cuadro de desenfoque lineal 3x3 y el enfoque descrito anteriormente.
+2. Escriba una rutina en su versión iterativa para generar una nueva estructura `BMP_Image`  que contenga una versión borrosa de la imagen de entrada original. Utilice el filtro de cuadro de desenfoque lineal 3x3 y el enfoque descrito anteriormente.
+3. Escriba una un conjunto de rutinas, para aplicar el filtro de cuadro en su versión en paralelo. Puede adaptar el codigo de la rutina anterior y dividir las regiones para varios hilos de ejecución. 
+4. Escriba una rutina para escribir esa nueva imagen BMP en un archivo de salida. Esto significa que debe obtener el formato de encabezado correcto (pista: debería poder reutilizar una gran cantidad de datos en el encabezado de la imagen de entrada).
+5. Escriba una rutina para liberar estructuras de datos de imágenes. Esta rutina debería liberar completamente la estructura de datos de la imagen.
 
-3. Escriba una rutina para escribir esa nueva imagen BMP en un archivo de salida. Esto significa que debe obtener el formato de encabezado correcto (pista: debería poder reutilizar una gran cantidad de datos en el encabezado de la imagen de entrada).
-4. Escriba una rutina para liberar estructuras de datos de imágenes. Esta rutina debería liberar completamente la estructura de datos de la imagen.
+Se ha proporcionado `bmp.h`, que declara la cabecera, la imagen y las estructuras de píxeles necesarios, así como los tres métodos, `readImage`, `writeImage`, y `freeImage`. Su trabajo es completar esas definiciones de métodos en el archivo bmp.c y otras definiciones más.
 
-Hemos proporcionado `bmp.h`, que declara la cabecera, la imagen y las estructuras de píxeles necesarios, así como los tres métodos, `readImage`, `writeImage`, y `freeImage`. Su trabajo es completar esas definiciones de métodos en el archivo bmp.c.
+También hemos proporcionado filter.h, que declara un método llamado apply y applyParallel. Su trabajo es completar la definición de estos metodos. 
 
-También hemos proporcionado filter.h, que declara un método llamado blur. Su trabajo es completar la definición de ese método filter.h.
+`void applyParallel(BMPImage * imageIn, BMPImage * imageOut, int boxFilter[3][3], int numThreads)`: Esta es la función que llamaremos para procesar su imagen en paralelo. Puede suponer que la matriz de píxeles y el encabezado de imageOut ya se han construido cuando lo llamamos. Además, pasamos el número de hilos. El trabajo de `applyParalell` es lanzar numThreadshilos para aplicar filtros de forma colaborativa a la imagen imageIn y escribir los resultados imageOut. 
 
 Si necesita / desea definir métodos adicionales en sus archivos, no dude en hacerlo. **No cree archivos adicionales**.
 
+## Pruebas del codigo 
 
+La forma más sencilla de comprobar si las funciones de lectura y escritura de imágenes funcionan correctamente es utilizarlas para duplicar un mapa de bits.
 
-## Pruebas
+En testcases se incluyen los archivos fuente, y además se incluyen sus archivos de solución para realizar las pruebas. Como parte del test, nuestro Makefile incluye test de salida y test memoria
 
 ## Entregable

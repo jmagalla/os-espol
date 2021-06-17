@@ -60,18 +60,13 @@ typedef struct BMP_Image {
     Pixel ** pixels;
 } BMP_Image;
 
-void PrintError(int error);
-int CheckArgCount(int argc);
-FILE* OpenFile(char* filename, char* opt);
-BMP_Image* CreateBMPImage();
-char* AllocateImageData(int dataSize);
-void ReadImageData(FILE* fptr, char* data, int dataSize);
-void InvertImageData(char* data, int dataSize);
-void WriteImage(FILE* fptr, BMP_Header* header, char* data, int dataSize);
-void FreeImage(BMP_Image* image);
-void CloseFile(FILE* fptr);
-int CheckBMPValid(BMP_Header* header);
-void PrintBMPHeader(BMP_Header* header);
-void PrintBMPImage(BMP_Image* image);
+void printError(int error);
+BMP_Image* createBMPImage();
+void readImage(char *srcFileName, BMP_Image *dataImage);
+void writeImage(char* destFileName, BMP_Image* dataImage);
+void freeImage(BMP_Image* image);
+int checkBMPValid(BMP_Header* header);
+void printBMPHeader(BMP_Header* header);
+void printBMPImage(BMP_Image* image);
 
 #endif /* bmp.h */
