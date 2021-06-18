@@ -129,13 +129,13 @@ También hemos proporcionado filter.h, que declara un método llamado apply y ap
 
 Si necesita / desea definir métodos adicionales en sus archivos, no dude en hacerlo. **No cree archivos adicionales**.
 
-## Pruebas del codigo 
+## Pruebas del código 
 
 La forma más sencilla de comprobar si las funciones de lectura y escritura de imágenes funcionan correctamente es utilizarlas para duplicar un mapa de bits.
 
 En testcases se incluyen los archivos fuente, y además se incluyen sus archivos de solución para realizar las pruebas. Como parte del test, nuestro Makefile incluye test de salida y test memoria
 
-## Entregable
+## Entregables
 Documento .zip que debe incluir: (1) los fuentes, bmp.c filter.c ex5.c y sus archivos de cabecera, (2) el archivo Makefile que incluya las instrucciones de compilación y construcción, y (3) documento de texto en formato PDF, llamado reporte-Threads.PDF, que describa a manera de reporte: - la problemática a resolver, - las limitaciones que tuvieron y cómo las resolvieron, y - las salidas de pantalla de las pruebas realizadas. Las pruebas que incluyan deben tener el objetivo de que su programa esté funcione correctamente. 
 
 Nota: **No comprima la carpeta en donde están todos los archivos**, sino que se requiere que a partir de la selección de archivos se cree el ZIP. Si no sigue esta especificación será penalizado. 

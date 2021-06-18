@@ -23,7 +23,7 @@ int main(int argc, char **argv) {
 
   readImage(source, image);
 
-  if(!CheckBMPValid(&image->header)) {
+  if(!checkBMPValid(&image->header)) {
     printError(VALID_ERROR);
     exit(EXIT_FAILURE);
   }
