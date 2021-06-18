@@ -57,12 +57,14 @@ typedef struct __attribute__((packed)) Pixel {
 typedef struct BMP_Image {
     BMP_Header header;
     int norm_height; //normalized height
+    int bytes_per_pixel; // This amount should be equals to number of bits/8
     Pixel ** pixels;
 } BMP_Image;
 
 void printError(int error);
 BMP_Image* createBMPImage();
-void readImage(char *srcFileName, BMP_Image *dataImage);
+void readImageData(FILE *srcFile, BMP_Image *dataImage, int dataSize);
+void readImage(FILE *srcFile, BMP_Image *dataImage);
 void writeImage(char* destFileName, BMP_Image* dataImage);
 void freeImage(BMP_Image* image);
 int checkBMPValid(BMP_Header* header);

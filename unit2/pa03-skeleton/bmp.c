@@ -41,12 +41,18 @@ BMP_Image* createBMPImage(FILE* fptr) {
   //Allocate memory for image data
 }
 
-/* The input arguments are the name of the binary file, and the image data pointer.
- * The functions open the source file and call to CreateBMPImage to load de data image.
+/* The input arguments are the source file pointer, the image data pointer, and the size of image data.
+ * The functions reads data from the source into the image data matriz of pixels.
 */
-void readImage(char *srcFileName, BMP_Image *dataImage) {
+void readImageData(FILE* srcFile, BMP_Image * image, int dataSize) {
+
 }
 
+/* The input arguments are the pointer of the binary file, and the image data pointer.
+ * The functions open the source file and call to CreateBMPImage to load de data image.
+*/
+void readImage(FILE *srcFile, BMP_Image * dataImage) {
+}
 
 /* The input arguments are the destination file name, and BMP_Image pointer.
  * The function write the header and image data into the destination file.
@@ -101,8 +107,7 @@ void printBMPHeader(BMP_Header* header) {
    DO NOT MODIFY THIS FUNCTION
 */
 void printBMPImage(BMP_Image* image) {
-  printf("data size is %d\n", image->data_size);
-  printf("width_px is %d\n", image->width_px);
-  printf("height_px size is %d\n", image->height);
+  printf("data size is %ld\n", sizeof(image->pixels));
+  printf("norm_height size is %d\n", image->norm_height);
   printf("bytes per pixel is %d\n", image->bytes_per_pixel);
 }

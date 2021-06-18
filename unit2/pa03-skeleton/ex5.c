@@ -7,36 +7,34 @@ int main(int argc, char **argv) {
   FILE* dest;
   BMP_Image* image = NULL;
 
-  if(!CheckArgCount(argc)){
-    return EXIT_FAILURE;
+  if (argc != 3) {
+    printError(ARGUMENT_ERROR);
+    exit(EXIT_FAILURE);
   }
-  if((source = OpenFile(argv[1], "rb")) == NULL) {
-    return EXIT_FAILURE;
+  
+  if((source = fopen(argv[1], "rb")) == NULL) {
+    printError(FILE_ERROR);
+    exit(EXIT_FAILURE);
   }
-  if((dest = OpenFile(argv[2], "wb")) == NULL) {
-    return EXIT_FAILURE;
+  if((dest = fopen(argv[2], "wb")) == NULL) {
+    printError(FILE_ERROR);
+    exit(EXIT_FAILURE);
   } 
 
-  image = CreateBMPImage(source);
+  readImage(source, image);
 
   if(!CheckBMPValid(&image->header)) {
-    PrintError(VALID_ERROR);
-    return EXIT_FAILURE;
-  }
-  if (image->data == NULL) {
-    return EXIT_FAILURE;
+    printError(VALID_ERROR);
+    exit(EXIT_FAILURE);
   }
 
-  PrintBMPHeader(&image->header);
-  PrintBMPImage(image);
+  readImage(source, image);
+  printBMPHeader(&image->header);
+  printBMPImage(image);
 
-  ReadImageData(source, image->data, image->data_size);
-  InvertImageData(image->data, image->data_size);
-  WriteImage(dest, &image->header, image->data, image->data_size);
+  freeImage(image);
+  fclose(source);
+  fclose(dest);
 
-  FreeImage(image);
-  CloseFile(source);
-  CloseFile(dest);
-
-  return EXIT_SUCCESS;
+  exit(EXIT_SUCCESS);
 }

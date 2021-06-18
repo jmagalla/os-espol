@@ -109,7 +109,7 @@ Hay muchas formas diferentes de dividir los píxeles, pero sugerimos un enfoque 
 
 - Cada hilo debe tener aproximadamente el mismo número de píxeles de salida para procesar (balance). De esta manera, ningún hilo tiene mucho más trabajo que hacer que otro.
 - No debe asignar un píxel a más de un hilo; de lo contrario, sus hilos no realizarán un trabajo independiente.
-- Cada píxel debe asignarse a un hilo; de lo contrario, no se hará parte del trabajo.
+- Todos los píxeles deben asignarse a un hilo; de lo contrario, no se hará parte del trabajo.
 
 ## Lo que tiene que hacer 
 
@@ -136,3 +136,9 @@ La forma más sencilla de comprobar si las funciones de lectura y escritura de i
 En testcases se incluyen los archivos fuente, y además se incluyen sus archivos de solución para realizar las pruebas. Como parte del test, nuestro Makefile incluye test de salida y test memoria
 
 ## Entregable
+Documento .zip que debe incluir: (1) los fuentes, bmp.c filter.c ex5.c y sus archivos de cabecera, (2) el archivo Makefile que incluya las instrucciones de compilación y construcción, y (3) documento de texto en formato PDF, llamado reporte-Threads.PDF, que describa a manera de reporte: - la problemática a resolver, - las limitaciones que tuvieron y cómo las resolvieron, y - las salidas de pantalla de las pruebas realizadas. Las pruebas que incluyan deben tener el objetivo de que su programa esté funcione correctamente. 
+
+Nota: **No comprima la carpeta en donde están todos los archivos**, sino que se requiere que a partir de la selección de archivos se cree el ZIP. Si no sigue esta especificación será penalizado. 
+
+> Creditos de este assigment al [Dr. Milind Kulkarni](https://engineering.purdue.edu/~milind/) researcher of Programming Languages and Compilers. Adaptado del sitio [ECE 264: Advanced C Programming](https://engineering.purdue.edu/~milind/ece264/2017spring/index.php)
+
