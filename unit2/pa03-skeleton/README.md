@@ -140,5 +140,7 @@ Documento .zip que debe incluir: (1) los fuentes, bmp.c filter.c ex5.c y sus arc
 
 Nota: **No comprima la carpeta en donde están todos los archivos**, sino que se requiere que a partir de la selección de archivos se cree el ZIP. Si no sigue esta especificación será penalizado. 
 
+    La resolución total o parcial de este assigment se encuentra en internet. No debe usar el código desde fuentes de internet que resuelve este assigment, ya que su código será pasado por software antiplagio que verifica la similitud. No se arriesgue a ser sancionado por actos de deshonestidad académica. Resuelva el assigment por sus propios medios. 
+
 > Creditos de este assigment al [Dr. Milind Kulkarni](https://engineering.purdue.edu/~milind/) researcher of Programming Languages and Compilers. Adaptado del sitio [ECE 264: Advanced C Programming](https://engineering.purdue.edu/~milind/ece264/2017spring/index.php)
 
