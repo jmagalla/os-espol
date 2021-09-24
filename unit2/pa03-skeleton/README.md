@@ -1,7 +1,7 @@
 # pa3: Binary Files and Processing Image
 
 ## Objetivos:
-En esta tarea de programación aprederá:
+En esta tarea de programación aprenderá:
 - Leer / escribir archivos binarios 
 - Mapas de bits 
 - Procesamiento básico de imágenes 
@@ -117,7 +117,7 @@ Su trabajo es:
 
 1. Escriba una rutina para leer archivos de imagen BMP. Esto significa asignar una estructura `BMP_Image` como se describe en bmp.h y asignar e inicializar los píxeles.
 2. Escriba una rutina en su versión iterativa para generar una nueva estructura `BMP_Image`  que contenga una versión borrosa de la imagen de entrada original. Utilice el filtro de cuadro de desenfoque lineal 3x3 y el enfoque descrito anteriormente.
-3. Escriba una un conjunto de rutinas, para aplicar el filtro de cuadro en su versión en paralelo. Puede adaptar el codigo de la rutina anterior y dividir las regiones para varios hilos de ejecución. 
+3. Escriba un conjunto de rutinas para aplicar el filtro de cuadro en su versión en paralelo. Puede adaptar el codigo de la rutina anterior y dividir las regiones para varios hilos de ejecución. 
 4. Escriba una rutina para escribir esa nueva imagen BMP en un archivo de salida. Esto significa que debe obtener el formato de encabezado correcto (pista: debería poder reutilizar una gran cantidad de datos en el encabezado de la imagen de entrada).
 5. Escriba una rutina para liberar estructuras de datos de imágenes. Esta rutina debería liberar completamente la estructura de datos de la imagen.
 
@@ -125,7 +125,7 @@ Se ha proporcionado `bmp.h`, que declara la cabecera, la imagen y las estructura
 
 También hemos proporcionado filter.h, que declara un método llamado apply y applyParallel. Su trabajo es completar la definición de estos metodos. 
 
-`void applyParallel(BMPImage * imageIn, BMPImage * imageOut, int boxFilter[3][3], int numThreads)`: Esta es la función que llamaremos para procesar su imagen en paralelo. Puede suponer que la matriz de píxeles y el encabezado de imageOut ya se han construido cuando lo llamamos. Además, pasamos el número de hilos. El trabajo de `applyParalell` es lanzar numThreadshilos para aplicar filtros de forma colaborativa a la imagen imageIn y escribir los resultados imageOut. 
+`void applyParallel(BMPImage * imageIn, BMPImage * imageOut, int boxFilter[3][3], int numThreads)`: Esta es la función que llamaremos para procesar su imagen en paralelo. Puede suponer que la matriz de píxeles y el encabezado de imageOut ya se han construido cuando lo llamamos. Además, pasamos el número de hilos. El trabajo de `applyParalell` es lanzar `numThreads` hilos para aplicar filtros de forma colaborativa a la imagen imageIn y escribir los resultados imageOut. 
 
 Si necesita / desea definir métodos adicionales en sus archivos, no dude en hacerlo. **No cree archivos adicionales**.
 
