@@ -14,9 +14,21 @@ Una compañía de servicios de taxis necesita una nueva estrategía diferenciado
 
 Para conseguirlo, se prentende tener taxis esperando en "sitios estratégicos”; definir estos sitios es la problemática que se debe resolver. 
 
-Considere representar a los sitios de la ciudad mediante un conjunto de intersecciones (cruce de calles). La distancia entre las intersecciones se representan mediante un grafo con las distancias entre cada una de ellas. La figura 1, muestra las intersecciones 0, 1, 2, .., 6 y 
+Considere representar a los sitios de la ciudad mediante un conjunto de intersecciones (cruce de calles). Las distancias entre las intersecciones se representan mediante un grafo, donde cada nodo es una intersección y cada arista es un camino o calle bidireccional que une dos interseccciones. Como muestra la figura 1, las intersecciones 0, 1, 2, 3, y 4, y las distancias entre ellas, por ejemplo, la distancia entre la intersección 1 y 3 es 4, entre 0 y 3 es 7, etc. 
 
-La estructura de datos usada para representar el grafo y la distancia entre las intersecciones ()
+![alt Figura 1](https://github.com/jmagalla/os-espol/blob/master/project/GrafoBidirec-img.png?raw=true)
+
+La Tabla 1, muestra la matriz cuadrada simétrica, con la diagonal principal en CERO y que representa al grafo antes descrito. 
+
+|-|0|1|2|3|4|
+|-|-|-|-|-|-|
+|0|0|3|0|7|8|
+|1|3|0|1|4|0|
+|2|0|1|0|2|0|
+|3|7|4|2|0|3|
+|4|8|0|0|3|0|
+
+Table: Tabla 1
 
 1) En el menor tiempo posible determinar los 3 mejores puntos de espera. Un punto de espera es aquel que aparece en como parte de la ruta de multiples viajes
 
