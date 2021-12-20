@@ -42,6 +42,10 @@ Su trabajo es:
 
 3. Escriba un programa cliente Result-Client.c que luego de cargado el grafo, en la región de memoria compartida, o luego de hacer un cambio en las distancias, calcule los n sitios estratégicos en el menor tiempo posible. De manera que, deberá construir una versión paralela para obtener todas las rutas de viajes y así obtener las n intersecciones que más aparezcan en esas rutas.
 
+Para encontrar el camino más corto entre una intersección y otra use el algoritmo de disjktra incluido en este repositorio. 
+
+Como recomendaciones finales, antes de escribir una línea de código aterrice su diseño en un documento. En este diseño incluya las técnicas que hemos revisado, shared memory, exclusión mutua, syncronización entre procesos y programación multihilos. 
+
 ## Entregables
 Documento .zip que debe incluir: (1) los fuentes, Grpah_Server.c ,Result-Client.c, y otros (2) el archivo Makefile que incluya las instrucciones de compilación y construcción, y (3) documento de texto en formato PDF, llamado ###-reporte-pa4.PDF, que describa a manera de reporte: - la problemática a resolver, - el diseño de la solución (con alguna herramienta que haya usado en cursos anteriores, como de ing. de software o de diseño de software)- las limitaciones que tuvieron y cómo las resolvieron, y - la descripción de las pruebas realizadas con sus salidas de pantalla. Las pruebas que incluyan deben tener el objetivo de verificar que su programa funcione correctamente. 
 
