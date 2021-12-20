@@ -16,7 +16,7 @@ Para conseguirlo, se prentende tener taxis esperando en "sitios estratégicos”
 
 Considere representar a los sitios de la ciudad mediante un conjunto de intersecciones (cruce de calles). Las distancias entre las intersecciones se representan mediante un grafo, donde cada nodo es una intersección y cada arista es un camino o calle bidireccional que une dos interseccciones. Como muestra la figura 1, las intersecciones 0, 1, 2, 3, y 4, y las distancias entre ellas, por ejemplo, la distancia entre la intersección 1 y 3 es 4, entre 0 y 3 es 7, etc. 
 
-![alt Figura 1](https://github.com/jmagalla/os-espol/blob/master/project/GrafoBidirec-img.png)
+![alt text](https://github.com/jmagalla/os-espol/blob/master/project/GrafoBidirec-img.png?raw=true)
 
 La Tabla 1, muestra la matriz cuadrada simétrica, con la diagonal principal en CERO y que representa al grafo antes descrito. 
 
@@ -30,9 +30,23 @@ La Tabla 1, muestra la matriz cuadrada simétrica, con la diagonal principal en 
 
 Table: Tabla 1
 
-1) En el menor tiempo posible determinar los 3 mejores puntos de espera. Un punto de espera es aquel que aparece en como parte de la ruta de multiples viajes
+De acuerdo a lo anterior, considere un sitio estratégico como aquella intersección que aparece más en las rutas de viaje para llegar de una intersección a otra. Considere también, que una ruta de viaje es el camino de menor costo de una intersección a otra. 
 
-2) Recalcule automaticamente los 3 puntos si hay un cambio en las distancias entre intersecciones o una interseccion deja de estar habilitada por ejemplo por reparaciones en la via.
+## Lo que tiene que hacer
 
-Entonces su sistema debe de tener al menos dos componentes: (a) Un programa que cargue el grafo y permita cambiar sus valores y (b) Un programa que calcule y muestre los 3 puntos de espera al inicio y si el grafo cambia. Las acciones de a y b deben realizarse sin tener que reinicar ningun componente de su sistema.
+Su trabajo es: 
 
+1. Escriba un programa servidor `Graph_Server.c`, que cargue el grafo a partir de un archivo delimitado por comas .CSV, y lo alamacene en memoria compartida. 
+
+2. Además, el programa servidor deberá permitir cambiar el valor de la distancia entre intersecciones por parte del usuario y actualizar el grafo compartido. 
+
+3. Escriba un programa cliente Result-Client.c que luego de cargado el grafo, en la región de memoria compartida, o luego de hacer un cambio en las distancias, calcule los n sitios estratégicos en el menor tiempo posible. De manera que, deberá construir una versión paralela para obtener todas las rutas de viajes y así obtener las n intersecciones que más aparezcan en esas rutas.
+
+## Entregables
+Documento .zip que debe incluir: (1) los fuentes, Grpah_Server.c ,Result-Client.c, y otros (2) el archivo Makefile que incluya las instrucciones de compilación y construcción, y (3) documento de texto en formato PDF, llamado ###-reporte-pa4.PDF, que describa a manera de reporte: - la problemática a resolver, - el diseño de la solución (con alguna herramienta que haya usado en cursos anteriores, como de ing. de software o de diseño de software)- las limitaciones que tuvieron y cómo las resolvieron, y - la descripción de las pruebas realizadas con sus salidas de pantalla. Las pruebas que incluyan deben tener el objetivo de verificar que su programa funcione correctamente. 
+
+En el nombre del archivo ###-reporte-pa4.PDF debe reemplazar ### por su apellido-nombre. 
+
+Nota: **No comprima la carpeta en donde están todos los archivos**, sino que se requiere que a partir de la selección de archivos se cree el ZIP. Si no sigue esta especificación será penalizado. 
+
+Nota: **No debe usar el código desde fuentes de internet que resuelve este assigment**, ya que su código será pasado por software antiplagio que verifica la similitud con otras fuentes. No se arriesgue a ser sancionado por actos de deshonestidad académica. Resuelva el assigment por sus propios medios. 
