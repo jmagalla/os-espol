@@ -16,7 +16,7 @@ Para conseguirlo, se prentende tener taxis esperando en "sitios estratégicos”
 
 Considere representar a los sitios de la ciudad mediante un conjunto de intersecciones (cruce de calles). Las distancias entre las intersecciones se representan mediante un grafo, donde cada nodo es una intersección y cada arista es un camino o calle bidireccional que une dos interseccciones. Como muestra la figura 1, las intersecciones 0, 1, 2, 3, y 4, y las distancias entre ellas, por ejemplo, la distancia entre la intersección 1 y 3 es 4, entre 0 y 3 es 7, etc. 
 
-![alt Figura 1](https://github.com/jmagalla/os-espol/blob/master/project/GrafoBidirec-img.png?raw=true)
+![alt Figura 1](https://github.com/jmagalla/os-espol/blob/master/project/GrafoBidirec-img.png)
 
 La Tabla 1, muestra la matriz cuadrada simétrica, con la diagonal principal en CERO y que representa al grafo antes descrito. 
 
