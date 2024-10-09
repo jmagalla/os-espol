@@ -1,6 +1,6 @@
 # Actividad: Interrupciones y Llamadas al Sistema
 
-## Objetivo:  
+## Objetivo
 Los estudiantes aprenderán los conceptos de interrupciones y llamadas al sistema, su relación con el hardware y software, y cómo un sistema operativo las maneja para interactuar con los recursos del sistema.
 
 ## Parte 1: Conceptos Teóricos
