@@ -1,7 +1,10 @@
-all: init mutex producer prod_wcond
+all: init mutex3threads mutex producer prod_wcond
 
 init: 
 	mkdir -p build
+
+mutex3threads: use_mutex_3threads.c
+	gcc -o build/mutex_3threads use_mutex_3threads.c -lpthread
 
 mutex: use_mutex.c
 	gcc -o build/mutex use_mutex.c -lpthread
